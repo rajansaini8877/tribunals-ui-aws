@@ -56,6 +56,13 @@ app.use(express.static('public'));
 //     res.render('answer', {answer: output});
 //   });
 
+app.get('/health', (req, res) => {
+  res.status(200).json({
+    code: 200,
+    message: "Healthy"
+  });
+})
+
 app.post('/output', (req, res) => {
   res.render('output')
 })
