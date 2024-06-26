@@ -1,0 +1,44 @@
+<!DOCTYPE html> 
+<html> 
+
+<head> 
+	<link href= 
+"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css"
+		rel="stylesheet" /> 
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+		integrity= 
+		"sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+		crossorigin="anonymous"> 
+	</script> 
+	<script src= 
+"https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"> 
+	</script> 
+</head> 
+
+<body> 
+	<center> 
+		<h1 class="ui green header">Geeksforgeeks</h1> 
+		<strong>Semantic UI Dropdown Selection Type</strong> 
+		<br /> 
+		<br /> 
+		<div class="ui selection dropdown"> 
+			<input type="hidden" name="webdev"> 
+			<i class="dropdown icon"></i> 
+			<div class="default text">WEB DEVELOPMENT COURSES</div> 
+			<div class="menu"> 
+				<div class="item" data-value="0">HTML</div> 
+				<div class="item" data-value="1">CSS</div> 
+				<div class="item" data-value="2">JAVASCRIPT</div> 
+				<div class="item" data-value="3">FRONT-END</div> 
+				<div class="item" data-value="4">BACK-END</div> 
+				<div class="item" data-value="5">FULL STACK</div> 
+			</div> 
+		</div> 
+	</center> 
+
+	<script> 
+		$('.ui.dropdown').dropdown(); 
+	</script> 
+</body> 
+
+</html>
