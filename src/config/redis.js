@@ -8,10 +8,10 @@ const connectRedis = () => {
 
         config.host = "appeals-cache.wqbzba.ng.0001.use1.cache.amazonaws.com";
         config.port = 6379;
-        config.tls = { rejectUnauthorized: false,
-            requestCert: true,
-      agent: false,
-         };
+    //     config.tls = { rejectUnauthorized: false,
+    //         requestCert: true,
+    //   agent: false,
+    //      };
 
         redisConn = new Redis(config);
 
