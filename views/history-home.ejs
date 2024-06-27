@@ -10,8 +10,8 @@
     <!-- Site Properties -->
     <title>Fixed Menu Example - Semantic</title>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-  <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
-  <script src="semantic/dist/semantic.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
+    <script src="semantic/dist/semantic.min.js"></script>
 
 
     <style type="text/css">
@@ -51,63 +51,42 @@
         </div>
     </div>
 
-    <div class="ui main text container">
-        <h1 class="ui header">Please provide case details</h1>
-        <br>
-        <form class="ui form" action="/case/home" method="post">
-            <h4 class="ui dividing header">Personal Information</h4>
-            <div class="field">
-                <label>Name</label>
-                <div class="two fields">
-                    <div class="field">
-                        <input type="text" name="firstName" placeholder="First Name">
-                    </div>
-                    <div class="field">
-                        <input type="text" name="lastName" placeholder="Last Name">
-                    </div>
-                </div>
-
-                <div class="two fields">
-                    <div class="field">
-                        <label>Gender</label>
-                        <div class="ui selection dropdown">
-                            <input type="hidden" name="gender">
-                            <i class="dropdown icon"></i>
-                            <div class="default text">Gender</div>
-                            <div class="menu">
-                                <div class="item" data-value="Male">Male</div>
-                                <div class="item" data-value="Female">Female</div>
-                                <div class="item" data-value="Other">Other</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="field">
-                        <label>DOB</label>
-                        <div class="ui calendar" id="dobpicker">
-                            <div class="ui input left icon">
-                                <i class="calendar icon"></i>
-                                <input type="text" name="dob" placeholder="Start">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+    <div class="ui main container">
+        <h1 class="ui header"><%= key %></h1>
+        <div class="ui raised segment">
+            <a class="ui blue ribbon label">Overview</a>
+            <h4 class="ui header">About the appeal</h4>
+            <p><%= summary %></p>
+          </div>
+          <div class="ui raised segment">
+            <a class="ui orange ribbon label">Decision</a>
+            
+            <p><%= decision %></p>
+          </div>
+        <div class="ui raised segment">
+        <div class="ui one column padded very relaxed grid">
+            <div class="column">
+                <h1 class="ui header">Have queries around this appeal?</h1>
+                <br>
+                <form class="ui form" action="/home" method="get">
+                    <div class="ui fluid action input">
+                        <input id="searchQuery" name="query" type="text" placeholder="Type your query here...">
+                        <button class="ui blue icon button" type="submit">
+                            <label for="searchQuery" class="ui blue button">
+                                <i class="wizard icon"></i>
+                                   Assist Me!
+                             </label>
+                          </button>
+                      </div>
+                </form>
             </div>
+            <!-- <div class="column">
+                <h1 class="ui header">Search placeholder</h1>
+                <br>
+            </div> -->
 
-            <h4 class="ui dividing header">Case Information</h4>
-            <div class="field">
-                <label>Claims</label>
-                <textarea name="claim"></textarea>
-              </div>
-              <div class="field">
-                <label>Evidences</label>
-                <textarea rows="2" name="evidences"></textarea>
-              </div>
-
-
-
-            <button class="ui button" type="submit">Submit</button>
-        </form>
+        </div>
+        </div>
     </div>
 
     <div class="ui inverted vertical footer segment">

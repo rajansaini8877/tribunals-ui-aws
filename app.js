@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const { fetchSimilarAct, fetchSimilarAppeal } = require('./src/services/fetch-similar');
+const generateAnswer = require('./src/services/generate-answers');
 // const extractFileSummary = require('./src/utils/extract-file-summary');
 // const extractTextSummary = require('./src/utils/extract-text-summary');
 // const searchSimilar = require('./src/utils/search-similar');
@@ -64,7 +65,18 @@ app.get('/health', (req, res) => {
   });
 })
 
-app.post('/case-home', async (req, res) => {
+app.post('/history/home', async (req, res) => {
+  console.log(req.body);
+  const summary = await generateAnswer(req.body.key, "What is the appeal about?");
+  const decision = await generateAnswer(req.body.key, "What decision is amde for the appeal?");
+  res.render('history-home', {
+    key: req.body.key,
+    summary: summary,
+    decision: decision
+  });
+})
+
+app.post('/case/home', async (req, res) => {
   console.log(req.body);
   console.log(req.body.firstName);
   const query = `Claim: ${req.body.claim}\nEvidences: ${req.body.evidences}`;

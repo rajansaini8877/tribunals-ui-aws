@@ -10,7 +10,7 @@
     <!-- Site Properties -->
     <title>Fixed Menu Example - Semantic</title>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="semantic/dist/semantic.min.css">
+    <link rel="stylesheet" type="text/css" href="/semantic/dist/semantic.min.css">
     <script src="semantic/dist/semantic.min.js"></script>
 
 
@@ -53,9 +53,8 @@
 
     <div class="ui main container">
         <h1 class="ui header">Intelligent Assist</h1>
-        <h4 class="ui horizontal divider header">
-            Personal Details
-          </h4>
+        <div class="ui raised segment">
+            <a class="ui blue ribbon label">Personal Details</a>
         <table class="ui striped table">
             <thead>
               <tr>
@@ -73,27 +72,23 @@
               
             </tbody>
           </table>
-          <h4 class="ui horizontal divider header">
-            Case Details
-          </h4>
-          <div class="ui segment">
+        </div>
+          <div class="ui raised segment">
+            <a class="ui blue ribbon label">Case Details</a>
             <%= input.claim %>
           </div>
-          <h4 class="ui horizontal divider header">
-            Evidence Details
-          </h4>
-          <div class="ui segment">
+          <div class="ui raised segment">
+            <a class="ui blue ribbon label">Evidences</a>
             <%= input.evidences %>
           </div>
-          <h4 class="ui horizontal divider header">
-            Intelligent Recommendations
-          </h4>
-        <div class="ui segment">
+          
+        <div class="ui raised segment">
+            <a class="ui orange ribbon label">Suggestions</a>
             <div class="ui one column padded very relaxed grid">
                 <div class="column">
                     <h1 class="ui header">Need help with Tribunals, Courts and Enforcement Act 2007?</h1>
                     <br>
-                    <form class="ui form" action="home" method="get">
+                    <form class="ui form" action="/home" method="get">
                         <div class="ui fluid action input">
                             <input id="searchQuery" name="query" type="text" placeholder="Search sections and schedules...">
                             <button class="ui blue icon button" type="submit">
@@ -130,10 +125,13 @@
                                 <%= item.text %>
                             </div>
                             <div class="extra">
-                                <div class="ui right floated primary button">
+                                <form action="/history/home" method="post">
+                                    <input type="hidden" name="key" value="<%= item.key %>">
+                                <button class="ui right floated primary button">
                                     Details
                                     <i class="right chevron icon"></i>
-                                </div>
+                                </button>
+                            </form>
                             </div>
                         </div>
                     </div>
