@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
+const fetchSimilar = require('./src/services/fetch-similar');
 // const extractFileSummary = require('./src/utils/extract-file-summary');
 // const extractTextSummary = require('./src/utils/extract-text-summary');
 // const searchSimilar = require('./src/utils/search-similar');
@@ -63,7 +64,8 @@ app.get('/health', (req, res) => {
   });
 })
 
-app.post('/output', (req, res) => {
+app.post('/output', async (req, res) => {
+  console.log(await fetchSimilar("judge of the First-tier Tribunal"));
   res.render('output')
 })
 
