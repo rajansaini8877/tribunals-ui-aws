@@ -64,20 +64,20 @@ app.get('/health', (req, res) => {
   });
 })
 
-app.post('/output', async (req, res) => {
+app.post('/case/home', async (req, res) => {
   console.log(req.body);
   console.log(req.body.firstName);
   const query = `Claim: ${req.body.claim}\nEvidences: ${req.body.evidences}`;
   const similarAppeals = await fetchSimilarAppeal(query);
   console.log(similarAppeals);
-  res.render('output', {
+  res.render('case-home', {
     input: req.body,
     appeals: similarAppeals
   });
 })
 
-app.post('/input', (req, res) => {
-    res.render('input')
+app.post('/form', (req, res) => {
+    res.render('form')
 })
 
   app.get('/home', (req, res) => {

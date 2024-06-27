@@ -86,10 +86,32 @@
             <%= input.evidences %>
           </div>
           <h4 class="ui horizontal divider header">
-            Description
+            Intelligent Recommendations
           </h4>
         <div class="ui segment">
-        <div class="ui two column padded very relaxed grid">
+            <div class="ui one column padded very relaxed grid">
+                <div class="column">
+                    <h1 class="ui header">Need help with Tribunals, Courts and Enforcement Act 2007?</h1>
+                    <br>
+                    <form class="ui form" action="home" method="get">
+                        <div class="ui fluid action input">
+                            <input id="searchQuery" name="query" type="text" placeholder="Search sections and schedules...">
+                            <button class="ui blue icon button" type="submit">
+                                <label for="searchQuery" class="ui blue button">
+                                    <i class="wizard icon"></i>
+                                       Search
+                                 </label>
+                              </button>
+                          </div>
+                    </form>
+                </div>
+                <!-- <div class="column">
+                    <h1 class="ui header">Search placeholder</h1>
+                    <br>
+                </div> -->
+    
+            </div>
+        <div class="ui one column padded very relaxed grid">
             <div class="column">
                 <h1 class="ui header">Similar past appeals</h1>
                 <br>
@@ -97,20 +119,19 @@
                     <% for(const item of appeals) { %>
                     <div class="item">
                         <div class="ui small image">
-                            <img src="assets/images/wireframe/image.png">
+                            <img src="assets/appeals-icon.png">
                         </div>
                         <div class="content">
                             <a class="header"><%= item.key %></a>
                             <div class="meta">
-                                <a>Date</a>
-                                <a>Category</a>
+                                <a>Decision taken</a>
                             </div>
                             <div class="description">
                                 <%= item.text %>
                             </div>
                             <div class="extra">
                                 <div class="ui right floated primary button">
-                                    Summary
+                                    Details
                                     <i class="right chevron icon"></i>
                                 </div>
                             </div>
@@ -119,15 +140,15 @@
                     <% } %>
                 </div>
             </div>
-            <div class="column">
+            <!-- <div class="column">
                 <h1 class="ui header">Search placeholder</h1>
                 <br>
-            </div>
+            </div> -->
 
         </div>
-        <div class="ui vertical divider">
+        <!-- <div class="ui vertical divider">
             and
-        </div>
+        </div> -->
     </div>
     </div>
     </div>

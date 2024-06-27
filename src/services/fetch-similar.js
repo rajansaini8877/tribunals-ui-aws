@@ -68,7 +68,14 @@ const fetchSimilarAppeal = async(query) => {
     }
     catch(err) {
         console.log(err.message);
-        return [];
+        const errResults = [];
+        const errResult = {
+            key: "SampleKey",
+            text: "Sample Text fpr Description",
+            uri: "sampleURI"
+        }
+        errResults.push(errResult);
+        return errResults;
     }
 }
 
