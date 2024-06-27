@@ -10,7 +10,7 @@ const connectRedis = () => {
         config.port = 6379;
         config.tls = { rejectUnauthorized: false,
             maxVersion: 'TLSv1.3',
-            minVersion: 'TLSv1.0',
+            minVersion: 'TLSv1.1',
          };
 
         redisConn = new Redis(config);
