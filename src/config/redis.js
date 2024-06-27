@@ -8,10 +8,7 @@ const connectRedis = () => {
 
         config.host = "appeals-cache.wqbzba.ng.0001.use1.cache.amazonaws.com";
         config.port = 6379;
-        config.tls = { rejectUnauthorized: false,
-            maxVersion: 'TLSv1.2',
-            minVersion: 'TLSv1.1',
-         };
+        config.tls = {};
 
         redisConn = new Redis(config);
 
