@@ -114,21 +114,21 @@
                     <% for(const item of appeals) { %>
                     <div class="item">
                         <div class="ui small image">
-                            <img src="assets/appeals-icon.png">
+                            <img src="/assets/appeals-icon.png">
                         </div>
                         <div class="content">
                             <a class="header"><%= item.key %></a>
                             <div class="meta">
-                                <a>Decision taken</a>
+                                <a><%= item.decision %></a>
                             </div>
                             <div class="description">
-                                <%= item.text %>
+                                <%= item.summary %>
                             </div>
                             <div class="extra">
                                 <form action="/history/home" method="post">
                                     <input type="hidden" name="key" value="<%= item.key %>">
                                 <button class="ui right floated primary button">
-                                    Details
+                                    Investigate Further
                                     <i class="right chevron icon"></i>
                                 </button>
                             </form>

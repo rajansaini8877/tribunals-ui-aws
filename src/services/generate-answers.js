@@ -1,5 +1,6 @@
 const { BedrockAgentRuntimeClient, RetrieveAndGenerateCommand  } = require("@aws-sdk/client-bedrock-agent-runtime");
 const { BedrockClient, GetFoundationModelCommand } = require("@aws-sdk/client-bedrock")
+const {saveToCache, fetchFromCache} = require('../utils/manage-cache');
 
 const config = {
     region: "us-east-1"
@@ -62,5 +63,32 @@ const arn = response.modelDetails.modelArn;
     }
 }
 
-module.exports = generateAnswer;
+const generateSummary = async(key) => {
+    const cacheKey = "Summary_"+key;
+    const dataFromCache = await fetchFromCache(cacheKey);
+    if(dataFromCache) {
+        return dataFromCache;
+    }
+    const answer = await generateAnswer(key, "What is the appeal about?");
+    await saveToCache(cacheKey, answer);
+    return answer;
+}
+
+const generateDecision = async(key) => {
+    const cacheKey = "Decision_"+key;
+    const dataFromCache = await fetchFromCache(cacheKey);
+
+    if(dataFromCache) {
+        return dataFromCache;
+    }
+    const answer = await generateAnswer(key, "Is the appeal allowed or dismissed?");
+    await saveToCache(cacheKey, answer);
+    return answer;
+}
+
+module.exports = { 
+    generateAnswer,
+    generateSummary,
+    generateDecision
+};
 

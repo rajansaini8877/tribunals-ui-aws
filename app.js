@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const { fetchSimilarAct, fetchSimilarAppeal } = require('./src/services/fetch-similar');
-const generateAnswer = require('./src/services/generate-answers');
+const { generateAnswer, generateSummary, generateDecision } = require('./src/services/generate-answers');
+const connectRedis = require('./src/config/redis');
 // const extractFileSummary = require('./src/utils/extract-file-summary');
 // const extractTextSummary = require('./src/utils/extract-text-summary');
 // const searchSimilar = require('./src/utils/search-similar');
@@ -67,8 +68,8 @@ app.get('/health', (req, res) => {
 
 app.post('/history/home', async (req, res) => {
   console.log(req.body);
-  const summary = await generateAnswer(req.body.key, "What is the appeal about?");
-  const decision = await generateAnswer(req.body.key, "What decision is amde for the appeal?");
+  const summary = await generateSummary(req.body.key);
+  const decision = await generateDecision(req.body.key);
   res.render('history-home', {
     key: req.body.key,
     summary: summary,
@@ -81,6 +82,11 @@ app.post('/case/home', async (req, res) => {
   console.log(req.body.firstName);
   const query = `Claim: ${req.body.claim}\nEvidences: ${req.body.evidences}`;
   const similarAppeals = await fetchSimilarAppeal(query);
+  
+  for(const item of similarAppeals) {
+    item['summary'] = await generateSummary(item.key);
+    item['decision'] = await generateDecision(item.key);
+  }
   console.log(similarAppeals);
   res.render('case-home', {
     input: req.body,
@@ -92,7 +98,8 @@ app.post('/form', (req, res) => {
     res.render('form')
 })
 
-  app.get('/home', (req, res) => {
+  app.get('/home', async (req, res) => {
+    await connectRedis();
     res.render('home');
   });
 
