@@ -64,7 +64,7 @@ app.get('/health', (req, res) => {
   });
 })
 
-app.post('/case/home', async (req, res) => {
+app.post('/case-home', async (req, res) => {
   console.log(req.body);
   console.log(req.body.firstName);
   const query = `Claim: ${req.body.claim}\nEvidences: ${req.body.evidences}`;
