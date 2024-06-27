@@ -22,10 +22,12 @@ const saveToCache = async (key, value) => {
 
 const fetchFromCache = async(key) => {
     try {
+        console.log("Inside fetch from cache");
         const redis = connectRedis();
-
+        console.log("Inside fetch from cache: After connect redis");
         if(redis) {
             const data = await redis.get(key);
+            console.log("Inside fetch from cache: After get");
             if(data) {
                 console.log("Fetched from cache");
                 return data;

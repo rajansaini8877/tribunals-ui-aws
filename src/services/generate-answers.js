@@ -65,19 +65,22 @@ const arn = response.modelDetails.modelArn;
 
 const generateSummary = async(key) => {
     const cacheKey = "Summary_"+key;
+    console.log(cacheKey);
     const dataFromCache = await fetchFromCache(cacheKey);
     if(dataFromCache) {
         return dataFromCache;
     }
+    console.log("Before generate");
     const answer = await generateAnswer(key, "What is the appeal about?");
+    console.log("After generate");
     await saveToCache(cacheKey, answer);
     return answer;
 }
 
 const generateDecision = async(key) => {
     const cacheKey = "Decision_"+key;
+    console.log(cacheKey);
     const dataFromCache = await fetchFromCache(cacheKey);
-
     if(dataFromCache) {
         return dataFromCache;
     }

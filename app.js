@@ -82,7 +82,7 @@ app.post('/case/home', async (req, res) => {
   console.log(req.body.firstName);
   const query = `Claim: ${req.body.claim}\nEvidences: ${req.body.evidences}`;
   const similarAppeals = await fetchSimilarAppeal(query);
-  
+  console.log(similarAppeals);
   for(const item of similarAppeals) {
     item['summary'] = await generateSummary(item.key);
     item['decision'] = await generateDecision(item.key);
