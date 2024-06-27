@@ -66,9 +66,9 @@
             </thead>
             <tbody>
               <tr>
-                <td>John Lilki</td>
-                <td>September 14, 2013</td>
-                <td>Male</td>
+                <td><%= input.firstName + " " + input.lastName %></td>
+                <td><%= input.dob %></td>
+                <td><%= input.gender %></td>
               </tr>
               
             </tbody>
@@ -77,13 +77,13 @@
             Case Details
           </h4>
           <div class="ui segment">
-            The case details provided
+            <%= input.claim %>
           </div>
           <h4 class="ui horizontal divider header">
             Evidence Details
           </h4>
           <div class="ui segment">
-            The evidence details provided
+            <%= input.evidences %>
           </div>
           <h4 class="ui horizontal divider header">
             Description
@@ -91,21 +91,22 @@
         <div class="ui segment">
         <div class="ui two column padded very relaxed grid">
             <div class="column">
-                <h1 class="ui header">Please provide case details</h1>
+                <h1 class="ui header">Similar past appeals</h1>
                 <br>
                 <div class="ui relaxed divided items">
+                    <% for(const item in appeals) { %>
                     <div class="item">
                         <div class="ui small image">
                             <img src="assets/images/wireframe/image.png">
                         </div>
                         <div class="content">
-                            <a class="header">Case ID</a>
+                            <a class="header"><%= item.key %></a>
                             <div class="meta">
                                 <a>Date</a>
                                 <a>Category</a>
                             </div>
                             <div class="description">
-                                A description (matching text) which api returns.
+                                <%= item.text %>
                             </div>
                             <div class="extra">
                                 <div class="ui right floated primary button">
@@ -115,120 +116,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="item">
-                        <div class="ui small image">
-                            <img src="assets/images/wireframe/image.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Content Header</a>
-                            <div class="meta">
-                                <a>Date</a>
-                                <a>Category</a>
-                            </div>
-                            <div class="description">
-                                A description which may flow for several lines and give context to the content.
-                            </div>
-                            <div class="extra">
-                                <div class="ui right floated primary button">
-                                    Primary
-                                    <i class="right chevron icon"></i>
-                                </div>
-                                <div class="ui label">Limited</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="ui small image">
-                            <img src="assets/images/wireframe/image.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Content Header</a>
-                            <div class="meta">
-                                <a>Date</a>
-                                <a>Category</a>
-                            </div>
-                            <div class="description">
-                                A description which may flow for several lines and give context to the content.
-                            </div>
-                            <div class="extra">
-                                <div class="ui right floated primary button">
-                                    Primary
-                                    <i class="right chevron icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <% } %>
                 </div>
             </div>
             <div class="column">
-                <h1 class="ui header">Please provide case details</h1>
+                <h1 class="ui header">Search placeholder</h1>
                 <br>
-                <div class="ui relaxed divided items">
-                    <div class="item">
-                        <div class="ui small image">
-                            <img src="assets/images/wireframe/image.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Case ID</a>
-                            <div class="meta">
-                                <a>Date</a>
-                                <a>Category</a>
-                            </div>
-                            <div class="description">
-                                A description (matching text) which api returns.
-                            </div>
-                            <div class="extra">
-                                <div class="ui right floated primary button">
-                                    Summary
-                                    <i class="right chevron icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="ui small image">
-                            <img src="assets/images/wireframe/image.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Content Header</a>
-                            <div class="meta">
-                                <a>Date</a>
-                                <a>Category</a>
-                            </div>
-                            <div class="description">
-                                A description which may flow for several lines and give context to the content.
-                            </div>
-                            <div class="extra">
-                                <div class="ui right floated primary button">
-                                    Primary
-                                    <i class="right chevron icon"></i>
-                                </div>
-                                <div class="ui label">Limited</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="ui small image">
-                            <img src="assets/images/wireframe/image.png">
-                        </div>
-                        <div class="content">
-                            <a class="header">Content Header</a>
-                            <div class="meta">
-                                <a>Date</a>
-                                <a>Category</a>
-                            </div>
-                            <div class="description">
-                                A description which may flow for several lines and give context to the content.
-                            </div>
-                            <div class="extra">
-                                <div class="ui right floated primary button">
-                                    Primary
-                                    <i class="right chevron icon"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
 
         </div>

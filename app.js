@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
-const fetchSimilar = require('./src/services/fetch-similar');
+const { fetchSimilarAct, fetchSimilarAppeal } = require('./src/services/fetch-similar');
 // const extractFileSummary = require('./src/utils/extract-file-summary');
 // const extractTextSummary = require('./src/utils/extract-text-summary');
 // const searchSimilar = require('./src/utils/search-similar');
@@ -65,8 +65,15 @@ app.get('/health', (req, res) => {
 })
 
 app.post('/output', async (req, res) => {
-  console.log(await fetchSimilar("judge of the First-tier Tribunal"));
-  res.render('output')
+  console.log(req.body);
+  console.log(req.body.firstName);
+  const query = `Claim: ${req.body.claim}\nEvidences: ${req.body.evidences}`;
+  const similarAppeals = await fetchSimilarAppeal(query);
+  console.log(similarAppeals);
+  res.render('output', {
+    input: req.body,
+    appeals: similarAppeals
+  });
 })
 
 app.post('/input', (req, res) => {

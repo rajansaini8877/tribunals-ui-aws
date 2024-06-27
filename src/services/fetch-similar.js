@@ -4,7 +4,7 @@ const config = {
     region: "us-east-1"
 };
 
-const fetchSimilar = async(query) => {
+const fetchSimilarAct = async(query) => {
     try {
     const client = new BedrockAgentRuntimeClient(config);
     const input = { // RetrieveRequest
@@ -36,6 +36,45 @@ const fetchSimilar = async(query) => {
     }
 }
 
-module.exports = fetchSimilar;
+const fetchSimilarAppeal = async(query) => {
+    try {
+    const client = new BedrockAgentRuntimeClient(config);
+    const input = { // RetrieveRequest
+        knowledgeBaseId: "A3QZ6RQQMB", // required
+        retrievalQuery: { // KnowledgeBaseQuery
+          text: query, // required
+        },
+        retrievalConfiguration: { // KnowledgeBaseRetrievalConfiguration
+          vectorSearchConfiguration: { // KnowledgeBaseVectorSearchConfiguration
+            numberOfResults: 3
+          },
+        }
+      };
+
+      const command = new RetrieveCommand(input);
+      const response = await client.send(command);
+      const results = [];
+      if(response.retrievalResults) {
+        for (const item of response.retrievalResults) {
+            result = {};
+            result['key'] = item.metadata.key;
+            result['text'] = item.content.text;
+            result['uri'] = item.location.s3Location.uri;
+            results.push(result)
+        }
+      }
+
+      return results;
+    }
+    catch(err) {
+        console.log(err.message);
+        return [];
+    }
+}
+
+module.exports = {
+    fetchSimilarAct,
+    fetchSimilarAppeal
+};
 
 

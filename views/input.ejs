@@ -60,10 +60,10 @@
                 <label>Name</label>
                 <div class="two fields">
                     <div class="field">
-                        <input type="text" name="shipping[first-name]" placeholder="First Name">
+                        <input type="text" name="firstName" placeholder="First Name">
                     </div>
                     <div class="field">
-                        <input type="text" name="shipping[last-name]" placeholder="Last Name">
+                        <input type="text" name="lastName" placeholder="Last Name">
                     </div>
                 </div>
 
@@ -75,9 +75,9 @@
                             <i class="dropdown icon"></i>
                             <div class="default text">Gender</div>
                             <div class="menu">
-                                <div class="item" data-value="1">Male</div>
-                                <div class="item" data-value="0">Female</div>
-                                <div class="item" data-value="-1">Other</div>
+                                <div class="item" data-value="Male">Male</div>
+                                <div class="item" data-value="Female">Female</div>
+                                <div class="item" data-value="Other">Other</div>
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="ui calendar" id="dobpicker">
                             <div class="ui input left icon">
                                 <i class="calendar icon"></i>
-                                <input type="text" placeholder="Start">
+                                <input type="text" name="dob" placeholder="Start">
                             </div>
                         </div>
                     </div>
@@ -97,11 +97,11 @@
             <h4 class="ui dividing header">Case Information</h4>
             <div class="field">
                 <label>Claims</label>
-                <textarea></textarea>
+                <textarea name="claim"></textarea>
               </div>
               <div class="field">
                 <label>Evidences</label>
-                <textarea rows="2"></textarea>
+                <textarea rows="2" name="evidences"></textarea>
               </div>
 
 
