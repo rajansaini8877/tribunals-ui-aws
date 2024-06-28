@@ -75,6 +75,16 @@ app.get('/utils/flush/cache', async(req, res) => {
   });
 })
 
+app.post('/history/response', async (req, res) => {
+  console.log(req.body);
+  const answer = await generateAnswer(req.body.key, req.body.query);
+  res.render('history-response', {
+    key: req.body.key,
+    query: req.body.query,
+    answer: answer
+  });
+});
+
 app.post('/history/home', async (req, res) => {
   console.log(req.body);
   const summary = await generateSummary(req.body.key);

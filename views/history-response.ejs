@@ -54,38 +54,11 @@
     <div class="ui main container">
         <h1 class="ui header"><%= key %></h1>
         <div class="ui raised segment">
-            <a class="ui blue ribbon label">Overview</a>
-            <h4 class="ui header">About the appeal</h4>
-            <p><%= summary %></p>
-          </div>
-          <div class="ui raised segment">
-            <a class="ui orange ribbon label">Decision</a>
-            <h4 class="ui header"><%= decision %></h4>
+            <a class="ui blue ribbon label">Response</a>
+            <h4 class="ui header"><%= query %></h4>
+            <p><%= answer %></p>
           </div>
         <div class="ui raised segment">
-        <div class="ui one column padded very relaxed grid">
-            <div class="column">
-                <h1 class="ui header">Have queries around this appeal?</h1>
-                <br>
-                <form class="ui form" action="/history/answer" method="post">
-                    <div class="ui fluid action input">
-                        <input type="hidden" name="key" value="<%= key %>">
-                        <input id="searchQuery" name="query" type="text" placeholder="Type your query here...">
-                        <button class="ui blue icon button" type="submit">
-                            <label for="searchQuery" class="ui blue button">
-                                <i class="wizard icon"></i>
-                                   Assist Me!
-                             </label>
-                          </button>
-                      </div>
-                </form>
-            </div>
-            <!-- <div class="column">
-                <h1 class="ui header">Search placeholder</h1>
-                <br>
-            </div> -->
-
-        </div>
         </div>
     </div>
 
