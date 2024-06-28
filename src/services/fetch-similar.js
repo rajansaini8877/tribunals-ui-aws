@@ -50,7 +50,6 @@ const fetchSimilarAppeal = async(query) => {
           },
         }
       };
-
       const command = new RetrieveCommand(input);
       const response = await client.send(command);
       const results = [];

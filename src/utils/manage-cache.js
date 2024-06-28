@@ -42,7 +42,33 @@ const fetchFromCache = async(key) => {
     }
 }
 
+const flushCache = async() => {
+    try {
+        const redis = connectRedis();
+        if(redis) {
+            const data = redis.keys("*").then((keys) => {
+                let pipeline = redis.pipeline();
+                keys.forEach((key) => {
+                    pipeline.del(key);
+                });
+                return pipeline.exec();
+            });
+            if(data) {
+                console.log("Cache flushed successfully!");
+                return data;
+            }
+        }
+        console.log("Could not flush cache: No data");
+        return false;
+    }
+    catch(err) {
+        console.log("Could not flush cache: " + err.message);
+        return false;
+    }
+}
+
 module.exports = {
     saveToCache,
-    fetchFromCache
+    fetchFromCache,
+    flushCache
 }

@@ -5,6 +5,7 @@ const app = express();
 const { fetchSimilarAct, fetchSimilarAppeal } = require('./src/services/fetch-similar');
 const { generateAnswer, generateSummary, generateDecision } = require('./src/services/generate-answers');
 const connectRedis = require('./src/config/redis');
+const {flushCache} = require('./src/utils/manage-cache');
 // const extractFileSummary = require('./src/utils/extract-file-summary');
 // const extractTextSummary = require('./src/utils/extract-text-summary');
 // const searchSimilar = require('./src/utils/search-similar');
@@ -60,6 +61,14 @@ app.use(express.static('public'));
 //   });
 
 app.get('/health', (req, res) => {
+  res.status(200).json({
+    code: 200,
+    message: "Healthy"
+  });
+})
+
+app.get('/utils/flush/cache', async(req, res) => {
+  await flushCache();
   res.status(200).json({
     code: 200,
     message: "Healthy"
