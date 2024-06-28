@@ -75,6 +75,14 @@ app.get('/utils/flush/cache', async(req, res) => {
   });
 })
 
+app.post('/case/act/results', async (req, res) => {
+  console.log(req.body);
+  const results = await fetchSimilarAct(req.body.query);
+  res.render('history-response', {
+    results: results
+  });
+});
+
 app.post('/history/response', async (req, res) => {
   console.log(req.body);
   const answer = await generateAnswer(req.body.key, req.body.query);

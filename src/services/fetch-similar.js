@@ -24,7 +24,12 @@ const fetchSimilarAct = async(query) => {
       const results = [];
       if(response.retrievalResults) {
         for (const item of response.retrievalResults) {
-            results.push(item.content.text)
+            const result = {};
+            result['value'] = item.content.text;
+            let key = item.location.s3Location.uri.split('/');
+            key = key[key.length-1];
+            result['key'] = key
+            results.push(result);
         }
       }
 
