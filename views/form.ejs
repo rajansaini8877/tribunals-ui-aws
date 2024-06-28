@@ -43,15 +43,16 @@
 
     <div class="ui inverted segment">
         <div class="ui container inverted secondary pointing menu">
-            <a class="active item">Home</a>
+            <a class="item" href="/home">Home</a>
             <a class="item">About</a>
             <div class="right item">
-                <i class="user circle icon"></i>
+                <i class="big user circle icon"></i>
             </div>
         </div>
     </div>
 
-    <div class="ui main text container">
+    <div class="ui main container">
+        <div class="ui raised very padded segment">
         <h1 class="ui header">Please provide case details</h1>
         <br>
         <form class="ui form" action="/case/home" method="post">
@@ -86,7 +87,7 @@
                         <div class="ui calendar" id="dobpicker">
                             <div class="ui input left icon">
                                 <i class="calendar icon"></i>
-                                <input type="text" name="dob" placeholder="Start">
+                                <input type="text" name="dob" placeholder="DOB">
                             </div>
                         </div>
                     </div>
@@ -97,17 +98,19 @@
             <h4 class="ui dividing header">Case Information</h4>
             <div class="field">
                 <label>Claims</label>
-                <textarea name="claim"></textarea>
+                <textarea name="claim" placeholder="Enter claim information..."></textarea>
               </div>
               <div class="field">
                 <label>Evidences</label>
-                <textarea rows="2" name="evidences"></textarea>
+                <textarea rows="2" name="evidences" placeholder="Enter claim related evidences..."></textarea>
               </div>
 
 
 
-            <button class="ui button" type="submit">Submit</button>
+            <button class="ui blue button" type="submit">Submit</button>
+            <div class="ui error message"></div>
         </form>
+        </div>
     </div>
 
     <div class="ui inverted vertical footer segment">
@@ -126,7 +129,7 @@
                 </div>
             </div>
             <div class="ui inverted section divider"></div>
-            <img src="assets/images/logo.png" class="ui centered mini image">
+            <img src="/assets/logo.png" class="ui centered tiny circular image">
             <div class="ui horizontal inverted small divided link list">
                 <a class="item" href="#">Site Map</a>
                 <a class="item" href="#">Contact Us</a>
@@ -140,6 +143,66 @@
         $('#dobpicker').calendar({
             type: 'date'
         });
+        $('.ui.form')
+  .form({
+    fields: {
+        firstName: {
+        identifier: 'firstName',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter first name'
+          }
+        ]
+      },
+      lastName: {
+        identifier: 'lastName',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter last name'
+          }
+        ]
+      },
+      gender: {
+        identifier: 'gender',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please select a gender'
+          }
+        ]
+      },
+      dob: {
+        identifier: 'dob',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter a date of birth'
+          }
+        ]
+      },
+      claim: {
+        identifier: 'claim',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter claim information'
+          }
+        ]
+      },
+      evidences: {
+        identifier: 'evidences',
+        rules: [
+          {
+            type   : 'empty',
+            prompt : 'Please enter claim evidences'
+          }
+        ]
+      }
+    }
+  })
+;
     </script>
 </body>
 

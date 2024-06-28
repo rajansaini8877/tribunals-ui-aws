@@ -51,20 +51,25 @@ const fetchSimilarAppeal = async(query) => {
         },
         retrievalConfiguration: { // KnowledgeBaseRetrievalConfiguration
           vectorSearchConfiguration: { // KnowledgeBaseVectorSearchConfiguration
-            numberOfResults: 3
+            numberOfResults: 5
           },
         }
       };
       const command = new RetrieveCommand(input);
       const response = await client.send(command);
       const results = [];
+      const keys = [];
       if(response.retrievalResults) {
         for (const item of response.retrievalResults) {
             result = {};
             result['key'] = item.metadata.key;
             result['text'] = item.content.text;
             result['uri'] = item.location.s3Location.uri;
-            results.push(result)
+            if(keys.includes(result['key'])) {
+              continue;
+            }
+            results.push(result);
+            keys.push(result['key']);
         }
       }
 
@@ -75,7 +80,7 @@ const fetchSimilarAppeal = async(query) => {
         const errResults = [];
         const errResult = {
             key: "SampleKey",
-            text: "Sample Text fpr Description",
+            text: "Sample Text for Description",
             uri: "sampleURI"
         }
         errResults.push(errResult);

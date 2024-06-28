@@ -78,7 +78,7 @@ app.get('/utils/flush/cache', async(req, res) => {
 app.post('/case/act/results', async (req, res) => {
   console.log(req.body);
   const results = await fetchSimilarAct(req.body.query);
-  res.render('history-response', {
+  res.render('case-act-results', {
     results: results
   });
 });
