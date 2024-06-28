@@ -28,6 +28,7 @@ const fetchSimilarAct = async(query) => {
             result['value'] = item.content.text;
             let key = item.location.s3Location.uri.split('/');
             key = key[key.length-1];
+            key = key.slice(0, -4); 
             result['key'] = key
             results.push(result);
         }
