@@ -111,13 +111,16 @@ const generateDecision = async(key) => {
 
     const keys = [];
     keys.push(key);
-    const answer = await generateAnswer(key, "Is the claimant appeal allowed or dismissed?");
+    const answer = await generateAnswer(keys, "Is the claimant appeal allowed or dismissed?");
     await saveToCache(cacheKey, answer);
     return answer;
 }
 
 const generateInsights = async(keys) => {
-    const answer = await generateAnswer(keys, "Give me the evidences considered to make decision in all the cases");
+    console.log("Inside generate insights: ");
+    console.log(keys);
+    const answer = await generateAnswer(keys, "Give me the list of evidences considered and short reasoning behind the tribunal decision in all the cases");
+    console.log("Generated insights: "+answer);
     return answer;
 }
 
