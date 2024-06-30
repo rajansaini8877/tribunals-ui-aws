@@ -117,7 +117,7 @@ const generateDecision = async(key) => {
 }
 
 const generateInsights = async(keys) => {
-    const answer = await generateAnswer(keys, "Judges are the author of given documents. Provide me quick highlights from the decision making factors in given cases");
+    const answer = await generateAnswer(keys, "Give me the evidences considered to make decision in all the cases");
     return answer;
 }
 

@@ -79,12 +79,15 @@ app.post('/case/home', async (req, res) => {
     keys.push(item.key);
 
     if(item['decision'].toLowerCase().includes('allow')) {
+      console.log("found allow");
       successCount = successCount + 1;
     }
     else if(item['decision'].toLowerCase().includes('dismiss')) {
+      console.log("found dismiss");
       // do nothing
     }
     else {
+      console.log("found none");
       successCount = successCount + 0.5;
     }
   }
@@ -95,6 +98,7 @@ app.post('/case/home', async (req, res) => {
   if(similarAppeals.length > 0) {
    insights = await generateInsights(keys);
    stats = successCount/similarAppeals.length;
+   stats = stats * 100;
    stats = Math.round(stats);
   }
   console.log(similarAppeals);
