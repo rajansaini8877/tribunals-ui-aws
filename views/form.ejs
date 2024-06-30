@@ -35,6 +35,9 @@
             margin: 5em 0em 0em;
             padding: 5em 0em;
         }
+        #valueslink {
+          margin: 0px 8px
+        }
     </style>
 
 </head>
@@ -43,8 +46,13 @@
 
     <div class="ui inverted segment">
         <div class="ui container inverted secondary pointing menu">
+          <div class="item">
+            <img src="/assets/logo.png" class="ui mini circular image">
+            </div>
+            <div class="left item">
             <a class="item" href="/home">Home</a>
             <a class="item">About</a>
+          </div>
             <div class="right item">
                 <i class="big user circle icon"></i>
             </div>
@@ -56,7 +64,7 @@
         <h1 class="ui header">Please provide case details</h1>
         <br>
         <form class="ui form" action="/case/home" method="post">
-            <h4 class="ui dividing header">Personal Information</h4>
+            <h4 class="ui dividing header">Claimant Information</h4>
             <div class="field">
                 <label>Name</label>
                 <div class="two fields">
@@ -74,7 +82,7 @@
                         <div class="ui selection dropdown">
                             <input type="hidden" name="gender">
                             <i class="dropdown icon"></i>
-                            <div class="default text">Gender</div>
+                            <div id="gendertext" class="default text">Gender</div>
                             <div class="menu">
                                 <div class="item" data-value="Male">Male</div>
                                 <div class="item" data-value="Female">Female</div>
@@ -108,6 +116,7 @@
 
 
             <button class="ui blue button" type="submit">Submit</button>
+            <a href="#" id="valueslink">Populate sample values</a>
             <div class="ui error message"></div>
         </form>
         </div>
@@ -203,6 +212,16 @@
     }
   })
 ;
+$('#valueslink').click(() => {
+  $('input[name="firstName"]').val('Olivia');
+  $('input[name="lastName"]').val('Evans');
+  $('input[name="gender"]').val('Female');
+  $('#gendertext').removeClass('default');
+  $('#gendertext').text('Female');
+  $('input[name="dob"]').val('January 1, 1970');
+  $('textarea[name="claim"]').val('The appellant has an artificial right eye and other vision difficulties. She also suffers from anxiety and depression. She appeals that she was not entitled to Personal Independence Payment by the Secretary of State');
+  $('textarea[name="evidences"]').val('Not a registered blind, does not use white cane, medical notes by Health Care Personnel (HCP)');
+})
     </script>
 </body>
 

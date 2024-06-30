@@ -6,7 +6,7 @@ const config = {
     region: "us-east-1"
 };
 
-const generateAnswer = async(key, query) => {
+const generateAnswer = async(keys, query) => {
     try {
     let client = new BedrockClient(config);
     let input = { // GetFoundationModelRequest
@@ -18,6 +18,15 @@ let response = await client.send(command);
 const arn = response.modelDetails.modelArn;
 
     client = new BedrockAgentRuntimeClient(config);
+    const filters = []
+    for(const key of keys) {
+        filters.push({
+            equals: {
+                key: "key",
+                value: key
+            }
+        });
+    }
     input = { // RetrieveRequest
         input: { // KnowledgeBaseQuery
           text: query, // required
@@ -30,19 +39,22 @@ const arn = response.modelDetails.modelArn;
             modelArn: arn,
             retrievalConfiguration: {
                 vectorSearchConfiguration: {
-                    numberOfResults: 1,
+                    numberOfResults: 50,
                     filter: {
-                        equals: {
-                            key: "key",
-                            value: key
-                        }
+                        orAll: filters
                     }
+                    // filter: {
+                    //     equals: {
+                    //         key: "key",
+                    //         value: key
+                    //     }
+                    // }
                 }
             },
             generationConfiguration: {
                 inferenceConfig: {
                     textInferenceConfig: {
-                        temperature: 0.1,
+                        temperature: 0,
                         topP: 0.9,
                         maxTokens: 1024,
                     }
@@ -70,7 +82,9 @@ const generateSummary = async(key) => {
         return dataFromCache;
     }
     
-    const answer = await generateAnswer(key, "What is the appeal about?");
+    const keys = [];
+    keys.push(key);
+    const answer = await generateAnswer(keys, "Generate detailed summary of the claim");
     
     await saveToCache(cacheKey, answer);
     return answer;
@@ -83,14 +97,23 @@ const generateDecision = async(key) => {
     if(dataFromCache) {
         return dataFromCache;
     }
-    const answer = await generateAnswer(key, "Is the appeal allowed or dismissed?");
+
+    const keys = [];
+    keys.push(key);
+    const answer = await generateAnswer(key, "Is the claimant appeal allowed or dismissed?");
     await saveToCache(cacheKey, answer);
+    return answer;
+}
+
+const generateInsights = async(keys) => {
+    const answer = await generateAnswer(key, "Judges are the author of given documents. Provide me quick highlights from the decision making factors in given cases");
     return answer;
 }
 
 module.exports = { 
     generateAnswer,
     generateSummary,
-    generateDecision
+    generateDecision,
+    generateInsights
 };
 

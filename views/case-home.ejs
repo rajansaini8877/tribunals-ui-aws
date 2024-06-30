@@ -43,8 +43,13 @@
 
     <div class="ui inverted segment">
         <div class="ui container inverted secondary pointing menu">
+          <div class="item">
+            <img src="/assets/logo.png" class="ui mini circular image">
+            </div>
+            <div class="left item">
             <a class="item" href="/home">Home</a>
             <a class="item">About</a>
+          </div>
             <div class="right item">
                 <i class="big user circle icon"></i>
             </div>
@@ -52,63 +57,99 @@
     </div>
 
     <div class="ui main container">
-        <h1 class="ui header">Intelligent Assist</h1>
-        <div class="ui raised segment">
-            <a class="ui blue ribbon label">Personal Details</a>
-        <table class="ui striped table">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Date of birth</th>
-                <th>Gender</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><%= input.firstName + " " + input.lastName %></td>
-                <td><%= input.dob %></td>
-                <td><%= input.gender %></td>
-              </tr>
-              
-            </tbody>
-          </table>
-        </div>
-          <div class="ui raised segment">
-            <a class="ui blue ribbon label">Case Details</a>
-            <%= input.claim %>
-          </div>
-          <div class="ui raised segment">
-            <a class="ui blue ribbon label">Evidences</a>
-            <%= input.evidences %>
-          </div>
-          
-        <div class="ui raised segment">
-            <a class="ui orange ribbon label">Suggestions</a>
-            <div class="ui one column padded very relaxed grid">
-                <div class="column">
-                    <h1 class="ui header">Need help with Tribunals, Courts and Enforcement Act 2007?</h1>
-                    <br>
-                    <form class="ui form" action="/case/act/results" method="post">
-                        <div class="ui fluid action input">
-                            <input id="searchQuery" name="query" type="text" placeholder="Search sections and schedules...">
-                            <button class="ui blue icon button" type="submit">
-                                <label for="searchQuery" class="ui blue button">
-                                    <i class="wizard icon"></i>
-                                       Search
-                                 </label>
-                              </button>
-                          </div>
-                    </form>
-                </div>
-                <!-- <div class="column">
-                    <h1 class="ui header">Search placeholder</h1>
-                    <br>
-                </div> -->
+        <h1 class="ui header">Intelligent Assist Dashboard</h1>
+        <br>
     
+
+    <div class="ui raised segment">
+        <a class="ui blue ribbon label">Provided details</a>
+<div class="ui one column padded very relaxed grid">
+    <div class="column">
+        
+        <div class="ui relaxed divided items">
+            <div class="item">
+                <table class="ui striped table">
+                    <thead>
+                      <tr>
+                        <th>Name</th>
+                        <th>Date of birth</th>
+                        <th>Gender</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><%= input.firstName + " " + input.lastName %></td>
+                        <td><%= input.dob %></td>
+                        <td><%= input.gender %></td>
+                      </tr>
+                      
+                    </tbody>
+                  </table>
             </div>
+            <div class="item">
+                <div>
+                    <h4 class="ui header">Case Details</h4>
+                    <%= input.claim %>
+                  </div>
+            </div>
+            <div class="item">
+                <div>
+                    <h4 class="ui header">Evidences</h4>
+                    <%= input.evidences %>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="column">
+        <h1 class="ui header">Search placeholder</h1>
+        <br>
+    </div> -->
+
+</div>
+<!-- <div class="ui vertical divider">
+    and
+</div> -->
+</div>
+          
+
+          
+          
+        
+            <div class="ui raised segment">
+                <a class="ui orange ribbon label">Suggestions</a>
         <div class="ui one column padded very relaxed grid">
             <div class="column">
-                <h1 class="ui header">Similar past appeals</h1>
+                <h2 class="ui header">Relevant Insights</h2>
+                <br>
+                <div class="ui two cards">
+  
+  
+                    <a href="#" class="ui blue card">
+                        
+                      <div class="content">
+                        <div class="header">In similar cases</div>
+                        
+                        <div class="description">
+                            <%= insights %>
+                        </div>
+                      </div>
+                      
+                    </a>
+                    
+                  <a href="#" class="ui green card">
+                      <div class="content">
+                        <div class="ui fluid statistic">
+                            <div class="value">
+                                <%= stats %>%
+                            </div>
+                            <div class="label">
+                              Similar appeals allowed
+                            </div>
+                          </div>
+                      </div>
+                      
+                    </a></div>
+                <h2 class="ui header">Past appeals on similar cases</h2>
                 <br>
                 <div class="ui relaxed divided items">
                     <% for(const item of appeals) { %>
@@ -118,8 +159,11 @@
                         </div>
                         <div class="content">
                             <a class="header"><%= item.key %></a>
+                            <br>
+                            
+                            
                             <div class="meta">
-                                <a><%= item.decision %></a>
+                                <div class="ui label"><%= item.decision %></div>
                             </div>
                             <div class="description">
                                 <%= item.summary %>
@@ -148,7 +192,34 @@
             and
         </div> -->
     </div>
+    <div class="ui raised segment">
+        <a class="ui orange ribbon label">Help</a>
+        <div class="ui one column padded very relaxed grid">
+            <div class="column">
+                <h2 class="ui header">Need help with Tribunals, Courts and Enforcement Act 2007?</h2>
+                <br>
+                <form class="ui form" action="/case/act/results" method="post">
+                    <div class="ui fluid action input">
+                        <input id="searchQuery" name="query" type="text" placeholder="Search sections and schedules...">
+                        <button class="ui blue icon button" type="submit">
+                            <label for="searchQuery" class="ui blue button">
+                                <i class="wizard icon"></i>
+                                   Search
+                             </label>
+                          </button>
+                      </div>
+                </form>
+            </div>
+            <!-- <div class="column">
+                <h1 class="ui header">Search placeholder</h1>
+                <br>
+            </div> -->
+
+        </div>
+        </div>
     </div>
+
+    
     </div>
 
     <div class="ui inverted vertical footer segment">

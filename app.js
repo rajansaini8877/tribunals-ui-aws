@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const path = require('path');
 const app = express();
 const { fetchSimilarAct, fetchSimilarAppeal } = require('./src/services/fetch-similar');
-const { generateAnswer, generateSummary, generateDecision } = require('./src/services/generate-answers');
+const { generateAnswer, generateSummary, generateDecision, generateInsights } = require('./src/services/generate-answers');
 const connectRedis = require('./src/config/redis');
 const {flushCache} = require('./src/utils/manage-cache');
 
@@ -44,7 +44,9 @@ app.post('/case/act/results', async (req, res) => {
 
 app.post('/history/response', async (req, res) => {
   console.log(req.body);
-  const answer = await generateAnswer(req.body.key, req.body.query);
+  const keys = [];
+  keys.push(req.body.key);
+  const answer = await generateAnswer(keys, req.body.query);
   res.render('history-response', {
     key: req.body.key,
     query: req.body.query,
@@ -69,14 +71,38 @@ app.post('/case/home', async (req, res) => {
   const query = `Claim: ${req.body.claim}\nEvidences: ${req.body.evidences}`;
   const similarAppeals = await fetchSimilarAppeal(query);
   console.log(similarAppeals);
+  const keys = [];
+  const successCount = 0;
   for(const item of similarAppeals) {
     item['summary'] = await generateSummary(item.key);
     item['decision'] = await generateDecision(item.key);
+    keys.push(item.key);
+
+    if(item['decision'].toLowerCase().includes('allow')) {
+      successCount = successCount + 1;
+    }
+    else if(item['decision'].toLowerCase().includes('dismiss')) {
+      // do nothing
+    }
+    else {
+      successCount = successCount + 0.5;
+    }
+  }
+
+  let insights = "No insights!";
+  let stats = 0;
+
+  if(similarAppeals.length > 0) {
+   insights = await generateInsights(keys);
+   stats = successCount/similarAppeals.length;
+   stats = Math.round(stats);
   }
   console.log(similarAppeals);
   res.render('case-home', {
     input: req.body,
-    appeals: similarAppeals
+    appeals: similarAppeals,
+    insights: insights,
+    stats: stats
   });
 })
 
