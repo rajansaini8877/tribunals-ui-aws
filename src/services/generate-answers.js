@@ -40,9 +40,9 @@ const arn = response.modelDetails.modelArn;
             retrievalConfiguration: {
                 vectorSearchConfiguration: {
                     numberOfResults: 50,
-                    filter: {
-                        orAll: filters
-                    }
+                    // filter: {
+                    //     orAll: filters
+                    // }
                     // filter: {
                     //     equals: {
                     //         key: "key",
@@ -63,6 +63,15 @@ const arn = response.modelDetails.modelArn;
           },
         }
       };
+
+      if(keys.length > 1) {
+        input.retrieveAndGenerateConfiguration.knowledgeBaseConfiguration.retrievalConfiguration.vectorSearchConfiguration['filter'] = {
+            orAll: filters
+        };
+      }
+      else if(keys.length == 1) {
+        input.retrieveAndGenerateConfiguration.knowledgeBaseConfiguration.retrievalConfiguration.vectorSearchConfiguration['filter'] = filters[0];
+      }
 
       command = new RetrieveAndGenerateCommand (input);
       response = await client.send(command);

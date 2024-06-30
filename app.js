@@ -72,7 +72,7 @@ app.post('/case/home', async (req, res) => {
   const similarAppeals = await fetchSimilarAppeal(query);
   console.log(similarAppeals);
   const keys = [];
-  const successCount = 0;
+  let successCount = 0;
   for(const item of similarAppeals) {
     item['summary'] = await generateSummary(item.key);
     item['decision'] = await generateDecision(item.key);
