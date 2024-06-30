@@ -119,7 +119,7 @@ const generateDecision = async(key) => {
 const generateInsights = async(keys) => {
     console.log("Inside generate insights: ");
     console.log(keys);
-    const answer = await generateAnswer(keys, "Give me the list of evidences considered and short reasoning behind the tribunal decision in all the cases");
+    const answer = await generateAnswer(keys, "What questions were asked from claimant in these cases?");
     console.log("Generated insights: "+answer);
     return answer;
 }
