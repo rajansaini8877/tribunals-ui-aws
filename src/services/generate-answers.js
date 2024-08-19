@@ -37,7 +37,7 @@ const arn = response.modelDetails.modelArn;
             type: "KNOWLEDGE_BASE",
 
           knowledgeBaseConfiguration: { // KnowledgeBaseVectorSearchConfiguration
-            knowledgeBaseId: "A3QZ6RQQMB",
+            knowledgeBaseId: "MUZ9WPHPLN",
             modelArn: arn,
             retrievalConfiguration: {
                 vectorSearchConfiguration: {
