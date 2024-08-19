@@ -8,7 +8,7 @@ const fetchSimilarAct = async(query) => {
     try {
     const client = new BedrockAgentRuntimeClient(config);
     const input = { // RetrieveRequest
-        knowledgeBaseId: "QGUMPYFD9T", // required
+        knowledgeBaseId: "JFSF1UZ6XY", // required
         retrievalQuery: { // KnowledgeBaseQuery
           text: query, // required
         },
@@ -46,7 +46,7 @@ const fetchSimilarAppeal = async(query) => {
     try {
     const client = new BedrockAgentRuntimeClient(config);
     const input = { // RetrieveRequest
-        knowledgeBaseId: "A3QZ6RQQMB", // required
+        knowledgeBaseId: "MUZ9WPHPLN", // required
         retrievalQuery: { // KnowledgeBaseQuery
           text: query, // required
         },
